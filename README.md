@@ -1,4 +1,4 @@
-# malicious-hash
+# Malicious-Hash
 
 Este projeto fornece uma agregação de hashes maliciosos de arquivos (SHA256), destinada à integração com produtos de segurança. As listas são formatadas para fácil consumo por ferramentas como firewalls Fortinet FortiGate, soluções de Endpoint Detection and Response (EDR) e outras plataformas de inteligência contra ameaças.
 
