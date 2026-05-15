@@ -1,50 +1,121 @@
-# Malicious-Hash
+# Feed de Threat Intelligence
 
-Este projeto fornece uma agregação de hashes maliciosos de arquivos (SHA256), destinada à integração com produtos de segurança. As listas são formatadas para fácil consumo por ferramentas como firewalls Fortinet FortiGate, soluções de Endpoint Detection and Response (EDR) e outras plataformas de inteligência contra ameaças.
+![Status](https://img.shields.io/badge/status-ativo-success?style=flat-square)
+![Licença](https://img.shields.io/badge/license-MIT-blue?style=flat-square)
+![FortiGate](https://img.shields.io/badge/FortiGate-compativel-red?style=flat-square)
+![Threat-Intel](https://img.shields.io/badge/threat%20intel-feeds-orange?style=flat-square)
 
-## Sobre os Hashes
+---
 
-O repositório contém listas de hashes SHA256 correspondentes a malwares conhecidos. Essas listas são mantidas para ajudar administradores e sistemas de segurança a bloquearem ameaças automaticamente.
+## 📌 Visão Geral
 
-A principal lista de hashes é:
+Este repositório fornece um **Feed de Threat Intelligence (IoCs)** voltado exclusivamente para integração com soluções **Fortinet FortiGate**.
 
-- `full-hash-sha256-aa.txt`
+O objetivo é permitir o bloqueio automático de ameaças conhecidas através de indicadores como:
 
-## Como Utilizar
+* 🧬 Hashes de arquivos maliciosos (SHA256)
+* 🌐 Endereços IP maliciosos
+* 🔗 Domínios maliciosos e infraestrutura C2
+* 🖧 Endereços MAC suspeitos
+* 📦 Feed unificado (todos os indicadores)
 
-Você pode utilizar a URL bruta (raw) do arquivo para integrar esta lista como um feed externo de ameaças em seus appliances e soluções de segurança. Cada linha do arquivo contém um único hash SHA256.
+---
 
-### URL raw da lista de hashes
+## 📂 Estrutura dos Feeds
 
-```txt
-https://raw.githubusercontent.com/giaosoissomsm/malicious-hash/main/full-hash-sha256-aa.txt
+Os indicadores são separados por tipo para facilitar a integração no FortiGate:
+
+| Arquivo             | Descrição                                        |
+| ------------------- | ------------------------------------------------ |
+| `hashs-sha256.txt` | Hashes SHA256 de arquivos maliciosos             |
+| `ips.txt`           | Endereços IP maliciosos                          |
+| `domains.txt`       | Domínios de comando e controle (C2) e maliciosos |
+| `macs.txt`          | Endereços MAC suspeitos ou comprometidos         |
+
+Cada linha contém apenas um indicador.
+
+---
+
+## 🔗 URLs dos Feeds (Raw)
+
+Utilize as URLs abaixo diretamente no FortiGate:
+
+```
+https://raw.githubusercontent.com/giaosoissomsm/malicious-hash/main/files/hashs-sha256.txt
+https://raw.githubusercontent.com/giaosoissomsm/malicious-hash/main/files/ips.txt
+https://raw.githubusercontent.com/giaosoissomsm/malicious-hash/main/files/domains.txt
+https://raw.githubusercontent.com/giaosoissomsm/malicious-hash/main/files/macs.txt
 ```
 
-## Exemplo de Integração com Fortinet FortiGate
+---
 
-Para utilizar esta lista como um conector externo/feed de ameaças para bloqueio de arquivos em um firewall FortiGate:
+## 🛡️ Integração com FortiGate
 
-1. Acesse o FortiGate e navegue até **Security Fabric > External Connectors**.
-2. Clique em **Create New**.
-3. Em **Threat Feeds**, selecione **Malware Hash**.
-4. No painel de configuração:
-   - Defina um **Nome** para o feed (exemplo: `Malicious-Hash-List`).
-   - Cole a URL raw abaixo no campo **URI of file**:
+Os feeds podem ser utilizados como **External Threat Feeds** para bloqueio automático de ameaças em tempo real.
 
-   ```txt
-   https://raw.githubusercontent.com/giaosoissomsm/malicious-hash/main/full-hash-sha256-aa.txt
-   ```
+### 🔧 Configuração
 
-   - Configure o intervalo de atualização desejado (exemplo: a cada 5 minutos).
+1. Acesse o FortiGate
 
-5. Clique em **OK** para salvar o conector.
-6. Navegue até **Security Profiles > AntiVirus**.
-7. Edite o perfil aplicado às políticas de segurança.
-8. Habilite a opção **Use External Malware Block List** e selecione o feed criado.
-9. Salve o perfil AntiVirus.
+2. Vá em **Security Fabric > External Connectors**
 
-O FortiGate irá baixar automaticamente a lista de hashes e bloquear arquivos que correspondam aos hashes informados durante a inspeção do tráfego.
+3. Clique em **Create New**
 
-## Licença
+4. Selecione o tipo de feed:
 
-Este projeto está licenciado sob a licença MIT. Consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
+   * Malware Hash Feed → `hashs-sha256.txt`
+   * IP Address Feed → `ips.txt`
+   * Domain Name Feed → `domains.txt`
+
+5. Configure:
+
+   * **Nome:** `Threat-Intel-Feed`
+   * **URI:** Cole a URL raw do GitHub
+   * **Intervalo de atualização:** recomendado 5 a 15 minutos
+
+6. Salve a configuração
+
+---
+
+## 🏷️ Categorias Personalizadas
+
+Os feeds podem ser organizados em categorias personalizadas no FortiGate:
+
+* `malware_hashes`
+* `c2_infrastructure`
+* `botnet_ips`
+* `dominios_maliciosos`
+* `indicadores_endpoint`
+
+Essas categorias podem ser aplicadas em:
+
+* Políticas de Firewall
+* Web Filter
+* DNS Filter
+* Perfis de AntiVirus
+* Regras de Threat Intelligence
+
+---
+
+## 🔥 Exemplo de Uso
+
+Após a integração, o FortiGate poderá:
+
+* Bloquear downloads de arquivos maliciosos por hash
+* Impedir acesso a domínios C2 conhecidos
+* Bloquear conexões com IPs maliciosos
+* Detectar comunicação com infraestrutura de ataque
+
+---
+
+## ⚙️ Atualização e Automação
+
+* Os feeds são atualizados continuamente
+* Intervalo recomendado: 15 a 60 minutos
+* Compatível com automação via API do FortiGate
+
+---
+
+## 📄 Licença
+
+Este projeto está licenciado sob a licença MIT.
