@@ -17,3 +17,4 @@ ngrok-free.app
 ngrok-free.dev
 crl.ngrok-agent.com
 connect.ngrok-agent.com
+serveo.net
