@@ -54,3 +54,5 @@ cjn37-uyaaa-aaaac-qgnva-cai.raw.icp0.io
 service-page-25144-30466-outlook.s3.us-west-2.amazonaws.com
 cloudfront-021.s3.us-west-2.amazonaws.com
 service-page-11369-28315-outlook.s3.us-west-2.amazonaws.com
+
+skynetchat.net
