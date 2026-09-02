@@ -56,3 +56,4 @@ cloudfront-021.s3.us-west-2.amazonaws.com
 service-page-11369-28315-outlook.s3.us-west-2.amazonaws.com
 
 skynetchat.net
+cursor.com
